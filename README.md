@@ -1,20 +1,5 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+﻿# KinDev Dentista
 
-# Run and deploy your AI Studio app
+Desarrollado y mantenido por **Kindev**.
 
-This contains everything you need to run your app locally.
-
-View your app in AI Studio: https://ai.studio/apps/6d688dff-22f8-4c37-9c8b-bfbc52f9c7f5
-
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+Este proyecto es una demostraciÃ³n de nuestros servicios y capacidades en el desarrollo de aplicaciones web de alto rendimiento.
