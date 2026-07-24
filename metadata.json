@@ -1,0 +1,6 @@
+{
+  "name": "Cielo Dental",
+  "description": "Clínica dental con tecnología avanzada para sonrisas perfectas. Agendamiento de citas, servicios de urgencia y especialidades odontológicas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
