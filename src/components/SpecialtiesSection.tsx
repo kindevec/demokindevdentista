@@ -1,133 +1,99 @@
-import React, { useState } from 'react';
-import { motion } from 'motion/react';
-import { Sparkles, ShieldCheck, Smile, HeartHandshake, Activity, Check, ArrowRight, MessageCircle, Clock } from 'lucide-react';
-import { SPECIALTIES_DATA, createWhatsAppLink } from '../data/clinicData';
-import { Specialty } from '../types';
+import React from 'react';
+import { ArrowRight } from 'lucide-react';
+import { createWhatsAppLink } from '../data/clinicData';
+import { AccordionGallery, AccordionItem } from './AccordionGallery';
 
 interface SpecialtiesSectionProps {
   onSelectSpecialtyForBooking: (specialtyId: string) => void;
 }
 
 export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({ onSelectSpecialtyForBooking }) => {
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [activeTabId, setActiveTabId] = useState<string>('ortodoncia');
-
-  const specialtyIconsMap: Record<string, React.ReactNode> = {
-    Sparkles: <Sparkles className="w-6 h-6 text-[#00BFFF]" />,
-    ShieldCheck: <ShieldCheck className="w-6 h-6 text-[#00BFFF]" />,
-    Smile: <Smile className="w-6 h-6 text-[#00BFFF]" />,
-    HeartHandshake: <HeartHandshake className="w-6 h-6 text-[#00BFFF]" />,
-    Activity: <Activity className="w-6 h-6 text-[#00BFFF]" />,
-  };
-
-  const activeSpecialty = SPECIALTIES_DATA.find((s) => s.id === activeTabId) || SPECIALTIES_DATA[0];
+  const treatmentItems: AccordionItem[] = [
+    {
+      id: "ortodoncia",
+      image: "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=900&auto=format&fit=crop",
+      label: "Ortodoncia Invisible y Digital",
+      desc: "Alineación digital con alineadores invisibles sin brackets.",
+      waMessage: "Hola Cielo Dental, quisiera solicitar una evaluación para el tratamiento de Ortodoncia Invisible.",
+    },
+    {
+      id: "implantes",
+      image: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?q=80&w=900&auto=format&fit=crop",
+      label: "Implantes Dentales Guiados 3D",
+      desc: "Cirugía guiada por computadora con carga inmediata.",
+      waMessage: "Hola Cielo Dental, me interesa agendar una consulta sobre Implantes Dentales Guiados.",
+    },
+    {
+      id: "estetica",
+      image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=900&auto=format&fit=crop",
+      label: "Diseño de Sonrisa & Blanqueamiento",
+      desc: "Carillas cerámicas ultra finas y aclaramiento dental LED.",
+      waMessage: "Hola Cielo Dental, deseo agendar una cita para Diseño de Sonrisa y Blanqueamiento.",
+    },
+    {
+      id: "odontopediatria",
+      image: "https://images.unsplash.com/photo-1579684453423-f84349ef60b0?q=80&w=900&auto=format&fit=crop",
+      label: "Odontopediatría y Cuidado Infantil",
+      desc: "Experiencia empática y libre de dolor pensada para niños.",
+      waMessage: "Hola Cielo Dental, me gustaría agendar una cita de Odontopediatría.",
+    },
+    {
+      id: "endodoncia",
+      image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=900&auto=format&fit=crop",
+      label: "Endodoncia Microscópica",
+      desc: "Tratamiento de conducto en 1 sola sesión con alivio del dolor.",
+      waMessage: "Hola Cielo Dental, requiero una evaluación de Endodoncia.",
+    },
+  ];
 
   return (
-    <section id="especialidades" className="py-20 bg-[#FDFDFD] relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="especialidades" className="py-24 bg-gradient-to-br from-[#005A9C] via-[#00487d] to-[#081D34] text-white relative overflow-hidden">
+      {/* Subtle Background Radial Ambient Glows */}
+      <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#00BFFF]/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[#00BFFF]/10 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <span className="px-3.5 py-1 rounded-full bg-cyan-50 text-[#005A9C] border border-cyan-200 text-xs font-bold uppercase tracking-wider">
-            Nuestras 5 Especialidades Odontológicas
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#005A9C] tracking-tight">
-            Tratamientos modernos diseñados para tu salud y estética
+        <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            Tratamientos modernos diseñados para tu <span className="text-[#00BFFF]">salud y estética</span>
           </h2>
-          <p className="text-sm sm:text-base text-[#708090]">
-            Utilizamos tecnología 3D libre de dolor, materiales biocompatibles de la más alta calidad y protocolos de esterilización hospitalaria.
+          <p className="text-sm sm:text-base text-cyan-100/90">
+            Pasa el cursor sobre cada tratamiento para expandir y explorar nuestra tecnología clínica de alta precisión.
           </p>
         </div>
 
-        {/* 5 Specialty Cards Grid - Super rounded rounded-3xl with blurred shadows */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {SPECIALTIES_DATA.map((spec, index) => (
-            <motion.div
-              key={spec.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-white/80 backdrop-blur-md rounded-3xl p-8 border border-[#00BFFF]/15 shadow-xl shadow-cyan-900/5 hover:border-[#00BFFF]/40 hover:shadow-2xl hover:shadow-cyan-500/10 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between relative overflow-hidden group"
-            >
-              {/* Top Accent Gradient Line */}
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#005A9C] via-[#00BFFF] to-[#005A9C] opacity-80 group-hover:opacity-100 transition-opacity" />
-
-              <div>
-                {/* Badge & Icon Header */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className="w-14 h-14 rounded-2xl bg-cyan-50 border border-cyan-100 flex items-center justify-center group-hover:bg-[#005A9C] transition-colors duration-300">
-                    {specialtyIconsMap[spec.iconName]}
-                  </div>
-                  {spec.badge && (
-                    <span className="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-gradient-to-r from-[#005A9C] to-[#00BFFF] text-white shadow-sm">
-                      {spec.badge}
-                    </span>
-                  )}
-                </div>
-
-                {/* Title & Description */}
-                <h3 className="text-xl font-bold text-[#005A9C] mb-3 group-hover:text-[#00BFFF] transition-colors">
-                  {spec.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-[#708090] mb-6 leading-relaxed">
-                  {spec.shortDesc}
-                </p>
-
-                {/* Features List */}
-                <div className="space-y-2.5 mb-8 border-t border-slate-100 pt-4">
-                  {spec.features.map((feat, fIdx) => (
-                    <div key={fIdx} className="flex items-start gap-2.5">
-                      <div className="p-0.5 rounded-full bg-cyan-100 text-[#005A9C] shrink-0 mt-0.5">
-                        <Check className="w-3.5 h-3.5 text-[#005A9C]" />
-                      </div>
-                      <span className="text-xs text-[#005A9C] font-medium leading-tight">{feat}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Card Footer & Action Buttons */}
-              <div className="space-y-3 pt-2">
-                <div className="flex items-center justify-between text-xs text-[#708090] pb-2 border-b border-slate-100">
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5 text-[#00BFFF]" />
-                    Duración estimada:
-                  </span>
-                  <span className="font-bold text-[#005A9C]">{spec.estimatedTime}</span>
-                </div>
-
-                <div className="grid grid-cols-2 gap-2">
-                  <button
-                    onClick={() => onSelectSpecialtyForBooking(spec.id)}
-                    className="w-full py-3 px-3 rounded-2xl bg-[#005A9C] hover:bg-[#00477b] text-white font-bold text-xs transition-colors flex items-center justify-center gap-1 shadow-sm"
-                  >
-                    <span>Reservar Cita</span>
-                  </button>
-
-                  <a
-                    href={createWhatsAppLink(spec.waMessage)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full py-3 px-3 rounded-2xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 font-bold text-xs transition-colors flex items-center justify-center gap-1"
-                  >
-                    <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>WhatsApp</span>
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+        {/* Accordion Gallery Component */}
+        <div className="mb-14">
+          <AccordionGallery
+            items={treatmentItems}
+            defaultIndex={0}
+            height={490}
+            radius={24}
+            gap={12}
+            accentColor="#00BFFF"
+            overlayColor="#081D34"
+            textColor="#FFFFFF"
+            duration={0.65}
+            expandRatio={0.5}
+            trigger="hover"
+            onOpenBooking={(treatmentId) => {
+              if (treatmentId) {
+                onSelectSpecialtyForBooking(treatmentId);
+              }
+            }}
+          />
         </div>
 
-        {/* Interactive Treatment Explorer Bar */}
-        <div className="mt-16 bg-gradient-to-r from-[#005A9C] to-[#00BFFF] rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden">
+        {/* Interactive Treatment Explorer Bar (Frosted Glass CTA) */}
+        <div className="mt-16 bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden">
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-8 space-y-2">
-              <span className="text-xs font-bold uppercase tracking-widest text-cyan-200">
+              <span className="text-xs font-bold uppercase tracking-widest text-[#00BFFF]">
                 ¿No estás seguro de cuál tratamiento necesitas?
               </span>
-              <h3 className="text-2xl sm:text-3xl font-extrabold">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
                 Diagnóstico digital preliminar sin costo en tu primera consulta
               </h3>
               <p className="text-xs sm:text-sm text-cyan-100/90 max-w-2xl">
@@ -139,10 +105,13 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({ onSelect
                 href={createWhatsAppLink("Hola Cielo Dental, quisiera agendar un diagnóstico digital preliminar con escáner 3D para evaluar mi caso.")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-4 rounded-full bg-white text-[#005A9C] hover:bg-cyan-50 font-bold text-xs uppercase tracking-wider transition-all shadow-lg hover:scale-105 flex items-center gap-2"
+                className="px-8 py-4 rounded-full bg-[#00BFFF] hover:bg-[#00a6de] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-lg hover:scale-105 flex items-center gap-2.5 cursor-pointer group"
               >
+                <svg className="w-4 h-4 fill-white shrink-0 group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+                </svg>
                 <span>Solicitar Evaluación 3D</span>
-                <ArrowRight className="w-4 h-4 text-[#00BFFF]" />
+                <ArrowRight className="w-4 h-4 text-white" />
               </a>
             </div>
           </div>

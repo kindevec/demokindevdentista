@@ -80,14 +80,11 @@ Notas: ${formData.notes || 'Dolor o emergencia dental activa.'}`
   );
 
   return (
-    <section id="contacto" className="py-20 bg-slate-50 relative">
+    <section id="contacto" className="pt-10 pb-20 md:pt-12 md:pb-24 bg-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <span className="px-3.5 py-1 rounded-full bg-cyan-100 text-[#005A9C] text-xs font-bold uppercase tracking-wider">
-            Sección 5: Canales Oficiales & Agendamiento
-          </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[#005A9C] tracking-tight">
             Redes Sociales Oficiales & Contacto Directo
           </h2>
@@ -136,17 +133,10 @@ Notas: ${formData.notes || 'Dolor o emergencia dental activa.'}`
                   </div>
 
                   {/* Bottom Bar */}
-                  <div className="space-y-2">
-                    <span className="inline-block text-[10px] uppercase font-bold tracking-wider text-[#00BFFF] bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
-                      Canal Verificado
-                    </span>
+                  <div>
                     <h3 className="text-2xl font-black text-white drop-shadow-md">
                       {sn.name}
                     </h3>
-                    <div className="pt-1 flex items-center gap-1.5 text-xs text-slate-200 font-medium">
-                      <span className="w-2 h-2 rounded-full bg-[#00BFFF] animate-pulse" />
-                      <span>Pasa el mouse para ver información</span>
-                    </div>
                   </div>
                 </div>
 
@@ -196,259 +186,250 @@ Notas: ${formData.notes || 'Dolor o emergencia dental activa.'}`
           })}
         </div>
 
-        {/* APPOINTMENT BOOKING FORM & CLINIC CONTACT INFO GRID */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          
-          {/* Left 7 Cols: Interactive Booking Form */}
-          <div className="lg:col-span-7 bg-white/80 backdrop-blur-md rounded-3xl p-8 sm:p-10 border border-[#00BFFF]/15 shadow-2xl relative">
-            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
-              <div className="p-3 rounded-2xl bg-cyan-100 text-[#005A9C]">
-                <Calendar className="w-6 h-6 text-[#005A9C]" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-[#005A9C]">Formulario de Agendamiento Web</h3>
-                <p className="text-xs text-[#708090]">Reserva tu espacio en menos de 1 minuto con confirmación vía WhatsApp.</p>
-              </div>
-            </div>
+        {/* OVERLAPPING FLOATING CONTACT & BOOKING CARD (Matching Reference Design) */}
+        <div className="max-w-6xl mx-auto relative pt-4">
+          <div className="relative grid grid-cols-1 lg:grid-cols-12 items-center">
+            
+            {/* 1. Left Floating / Overlapping Colored Card (Contact Info) */}
+            <div className="lg:col-span-5 bg-gradient-to-br from-[#005A9C] via-[#004b82] to-[#081D34] text-white rounded-3xl p-8 sm:p-10 shadow-2xl z-20 lg:-mr-8 relative border border-cyan-400/20">
+              {/* Subtle ambient lighting inside card */}
+              <div className="absolute top-0 right-0 w-48 h-48 bg-[#00BFFF]/15 rounded-full blur-2xl pointer-events-none" />
 
-            {isSubmitted ? (
-              <div className="py-12 text-center space-y-4 animate-in fade-in duration-300">
-                <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
-                  <CheckCircle className="w-10 h-10" />
+              <div className="relative z-10 space-y-6">
+                <div>
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
+                    Información de Contacto
+                  </h3>
                 </div>
-                <h4 className="text-2xl font-bold text-[#005A9C]">¡Solicitud enviada con éxito!</h4>
-                <p className="text-xs text-[#708090] max-w-md mx-auto">
-                  Hemos transferido tu solicitud a nuestro canal de recepción en WhatsApp ({CLINIC_PHONE_DISPLAY}). Un asesor se comunicará contigo de inmediato para confirmar tu hora exacta.
-                </p>
-                <button
-                  onClick={() => setIsSubmitted(false)}
-                  className="px-6 py-2.5 rounded-full bg-[#005A9C] text-white text-xs font-bold uppercase tracking-wider"
-                >
-                  Agendar otra cita
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                {/* Emergency Checkbox Alert */}
-                <div className="p-4 rounded-2xl bg-red-50 border border-red-200 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <AlertCircle className="w-5 h-5 text-red-600 shrink-0" />
+
+                <div className="space-y-5 pt-2">
+                  {/* Address */}
+                  <div className="flex items-start gap-3.5">
+                    <div className="p-2 rounded-xl bg-white/10 text-[#00BFFF] shrink-0">
+                      <MapPin className="w-5 h-5" />
+                    </div>
                     <div>
-                      <p className="text-xs font-bold text-red-700">¿Es una emergencia o dolor agudo?</p>
-                      <p className="text-[11px] text-red-600">Marque la casilla para asignación prioritaria 24/7</p>
+                      <p className="text-xs font-bold text-cyan-200">Ubicación Geográfica</p>
+                      <p className="text-xs text-white leading-snug">{CLINIC_ADDRESS}</p>
                     </div>
                   </div>
-                  <input
-                    type="checkbox"
-                    checked={formData.isEmergency}
-                    onChange={(e) => setFormData({ ...formData, isEmergency: e.target.checked })}
-                    className="w-5 h-5 rounded text-red-600 focus:ring-red-500 cursor-pointer"
-                  />
-                </div>
 
-                {/* Patient Name & Phone */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold text-[#005A9C] mb-1">
-                      Nombre Completo *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="Ej. María Fernanda López"
-                      value={formData.patientName}
-                      onChange={(e) => setFormData({ ...formData, patientName: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs focus:outline-none focus:border-[#00BFFF] focus:bg-white text-[#005A9C]"
-                    />
+                  {/* Email */}
+                  <div className="flex items-start gap-3.5">
+                    <div className="p-2 rounded-xl bg-white/10 text-[#00BFFF] shrink-0">
+                      <Mail className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold text-cyan-200">Correo Electrónico</p>
+                      <a href={`mailto:${CLINIC_EMAIL}`} className="text-xs text-white hover:text-[#00BFFF] transition-colors">
+                        {CLINIC_EMAIL}
+                      </a>
+                    </div>
                   </div>
 
-                  <div>
-                    <label className="block text-xs font-bold text-[#005A9C] mb-1">
-                      Teléfono Móvil (WhatsApp) *
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      placeholder="Ej. 099 195 2889"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs focus:outline-none focus:border-[#00BFFF] focus:bg-white text-[#005A9C]"
-                    />
-                  </div>
-                </div>
-
-                {/* Email & Specialty */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold text-[#005A9C] mb-1">
-                      Correo Electrónico
-                    </label>
-                    <input
-                      type="email"
-                      placeholder="ejemplo@correo.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs focus:outline-none focus:border-[#00BFFF] focus:bg-white text-[#005A9C]"
-                    />
+                  {/* Phone */}
+                  <div className="flex items-start gap-3.5">
+                    <div className="p-2 rounded-xl bg-white/10 text-[#00BFFF] shrink-0">
+                      <Phone className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold text-cyan-200">Teléfono Recepción Directa</p>
+                      <a
+                        href={`tel:${CLINIC_PHONE_DISPLAY.replace(/\s+/g, '')}`}
+                        className="text-sm font-extrabold text-white hover:text-[#00BFFF] transition-colors block"
+                      >
+                        {CLINIC_PHONE_DISPLAY}
+                      </a>
+                    </div>
                   </div>
 
-                  <div>
-                    <label className="block text-xs font-bold text-[#005A9C] mb-1">
-                      Especialidad de Interés
-                    </label>
-                    <select
-                      value={formData.specialtyId}
-                      onChange={(e) => setFormData({ ...formData, specialtyId: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs focus:outline-none focus:border-[#00BFFF] focus:bg-white text-[#005A9C] font-medium"
-                    >
-                      {SPECIALTIES_DATA.map((s) => (
-                        <option key={s.id} value={s.id}>
-                          {s.title}
-                        </option>
-                      ))}
-                    </select>
+                  {/* Hours */}
+                  <div className="flex items-start gap-3.5">
+                    <div className="p-2 rounded-xl bg-white/10 text-[#00BFFF] shrink-0">
+                      <Clock className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold text-cyan-200">Horarios de Atención</p>
+                      <p className="text-xs text-white">{CLINIC_HOURS}</p>
+                    </div>
                   </div>
                 </div>
 
-                {/* Preferred Doctor & Date */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold text-[#005A9C] mb-1">
-                      Especialista Preferido
-                    </label>
-                    <select
-                      value={formData.doctorId}
-                      onChange={(e) => setFormData({ ...formData, doctorId: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs focus:outline-none focus:border-[#00BFFF] focus:bg-white text-[#005A9C] font-medium"
-                    >
-                      {DOCTORS_DATA.map((d) => (
-                        <option key={d.id} value={d.id}>
-                          {d.name} ({d.specialty})
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+              </div>
+            </div>
 
-                  <div>
-                    <label className="block text-xs font-bold text-[#005A9C] mb-1">
-                      Fecha Preferida
-                    </label>
-                    <input
-                      type="date"
-                      value={formData.preferredDate}
-                      onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs focus:outline-none focus:border-[#00BFFF] focus:bg-white text-[#005A9C]"
-                    />
-                  </div>
+            {/* 2. Right Main Card (Booking Form) */}
+            <div className="lg:col-span-7 bg-white rounded-3xl p-5 sm:p-8 lg:p-10 border border-slate-200 shadow-xl relative z-10 -mt-6 lg:mt-0">
+              
+              <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+                <div className="p-3 rounded-2xl bg-cyan-50 text-[#005A9C]">
+                  <Calendar className="w-6 h-6 text-[#005A9C]" />
                 </div>
-
-                {/* Notes */}
                 <div>
-                  <label className="block text-xs font-bold text-[#005A9C] mb-1">
-                    Motivo de Consulta o Comentarios
-                  </label>
-                  <textarea
-                    rows={3}
-                    placeholder="Describe brevemente lo que te gustaría evaluar o consultar..."
-                    value={formData.notes}
-                    onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs focus:outline-none focus:border-[#00BFFF] focus:bg-white text-[#005A9C]"
-                  />
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-[#005A9C]">Formulario de Agendamiento</h3>
                 </div>
+              </div>
 
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  className="w-full py-4 rounded-full bg-gradient-to-r from-[#005A9C] to-[#00BFFF] hover:from-[#00477b] hover:to-[#00a3da] text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-cyan-500/20 transition-all hover:scale-[1.01] flex items-center justify-center gap-2"
-                >
-                  <Send className="w-4 h-4 text-white" />
-                  <span>Confirmar & Enviar por WhatsApp ({CLINIC_PHONE_DISPLAY})</span>
-                </button>
-              </form>
-            )}
-          </div>
-
-          {/* Right 5 Cols: Clinic Information & Map Card */}
-          <div className="lg:col-span-5 space-y-6">
-            
-            {/* Contact Details Card */}
-            <div className="bg-white/80 backdrop-blur-md rounded-3xl p-8 border border-[#00BFFF]/15 shadow-xl space-y-6">
-              <h3 className="text-xl font-bold text-[#005A9C]">Información de la Clínica</h3>
-
-              <div className="space-y-4">
-                <div className="flex items-start gap-3.5">
-                  <div className="p-2.5 rounded-2xl bg-cyan-50 text-[#005A9C] shrink-0">
-                    <Phone className="w-5 h-5 text-[#00BFFF]" />
+              {isSubmitted ? (
+                <div className="py-12 text-center space-y-4 animate-in fade-in duration-300">
+                  <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+                    <CheckCircle className="w-10 h-10" />
                   </div>
+                  <h4 className="text-2xl font-bold text-[#005A9C]">¡Solicitud enviada con éxito!</h4>
+                  <p className="text-xs text-[#708090] max-w-md mx-auto">
+                    Hemos transferido tu solicitud a nuestro canal de recepción en WhatsApp ({CLINIC_PHONE_DISPLAY}). Un asesor se comunicará contigo de inmediato para confirmar tu hora exacta.
+                  </p>
+                  <button
+                    onClick={() => setIsSubmitted(false)}
+                    className="px-6 py-2.5 rounded-full bg-[#005A9C] text-white text-xs font-bold uppercase tracking-wider cursor-pointer"
+                  >
+                    Agendar otra cita
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  {/* Emergency Checkbox Alert */}
+                  <div className="p-4 rounded-2xl bg-red-50/80 border border-red-200 flex items-center justify-between">
+                    <div className="flex items-center gap-2.5">
+                      <AlertCircle className="w-5 h-5 text-red-600 shrink-0" />
+                      <div>
+                        <p className="text-xs font-bold text-red-700">¿Es una emergencia o dolor agudo?</p>
+                        <p className="text-[11px] text-red-600">Marque la casilla para asignación prioritaria 24/7</p>
+                      </div>
+                    </div>
+                    <input
+                      type="checkbox"
+                      checked={formData.isEmergency}
+                      onChange={(e) => setFormData({ ...formData, isEmergency: e.target.checked })}
+                      className="w-5 h-5 rounded text-red-600 focus:ring-red-500 cursor-pointer"
+                    />
+                  </div>
+
+                  {/* Patient Name & Phone */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-[#005A9C] mb-1">
+                        Nombre Completo *
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="Ej. María Fernanda López"
+                        value={formData.patientName}
+                        onChange={(e) => setFormData({ ...formData, patientName: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs focus:outline-none focus:border-[#00BFFF] focus:bg-white text-[#005A9C] transition-all"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-[#005A9C] mb-1">
+                        Teléfono Móvil (WhatsApp) *
+                      </label>
+                      <input
+                        type="tel"
+                        required
+                        placeholder="Ej. 099 195 2889"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs focus:outline-none focus:border-[#00BFFF] focus:bg-white text-[#005A9C] transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Email & Specialty */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-[#005A9C] mb-1">
+                        Correo Electrónico
+                      </label>
+                      <input
+                        type="email"
+                        placeholder="ejemplo@correo.com"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs focus:outline-none focus:border-[#00BFFF] focus:bg-white text-[#005A9C] transition-all"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-[#005A9C] mb-1">
+                        Especialidad de Interés
+                      </label>
+                      <select
+                        value={formData.specialtyId}
+                        onChange={(e) => setFormData({ ...formData, specialtyId: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs focus:outline-none focus:border-[#00BFFF] focus:bg-white text-[#005A9C] font-medium transition-all"
+                      >
+                        {SPECIALTIES_DATA.map((s) => (
+                          <option key={s.id} value={s.id}>
+                            {s.title}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Preferred Doctor & Date */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-[#005A9C] mb-1">
+                        Especialista Preferido
+                      </label>
+                      <select
+                        value={formData.doctorId}
+                        onChange={(e) => setFormData({ ...formData, doctorId: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs focus:outline-none focus:border-[#00BFFF] focus:bg-white text-[#005A9C] font-medium transition-all"
+                      >
+                        {DOCTORS_DATA.map((d) => (
+                          <option key={d.id} value={d.id}>
+                            {d.name} ({d.specialty})
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-[#005A9C] mb-1">
+                        Fecha Preferida
+                      </label>
+                      <input
+                        type="date"
+                        value={formData.preferredDate}
+                        onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs focus:outline-none focus:border-[#00BFFF] focus:bg-white text-[#005A9C] transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Notes */}
                   <div>
-                    <p className="text-xs font-bold text-[#005A9C]">Teléfono Recepción Directa</p>
-                    <a
-                      href={`tel:${CLINIC_PHONE_DISPLAY.replace(/\s+/g, '')}`}
-                      className="text-sm font-extrabold text-[#005A9C] hover:text-[#00BFFF]"
+                    <label className="block text-xs font-bold text-[#005A9C] mb-1">
+                      Motivo de Consulta o Comentarios
+                    </label>
+                    <textarea
+                      rows={3}
+                      placeholder="Describe brevemente lo que te gustaría evaluar o consultar..."
+                      value={formData.notes}
+                      onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs focus:outline-none focus:border-[#00BFFF] focus:bg-white text-[#005A9C] transition-all resize-none"
+                    />
+                  </div>
+
+                  {/* Submit Button */}
+                  <div className="pt-2">
+                    <button
+                      type="submit"
+                      className="w-full py-4 rounded-full bg-gradient-to-r from-[#005A9C] to-[#00BFFF] hover:from-[#00477b] hover:to-[#00a3da] text-white font-bold text-sm uppercase tracking-wider shadow-lg shadow-cyan-500/20 transition-all hover:scale-[1.01] flex items-center justify-center gap-2 cursor-pointer"
                     >
-                      {CLINIC_PHONE_DISPLAY}
-                    </a>
-                    <p className="text-[11px] text-[#708090]">Respuesta directa de nuestro personal médico</p>
+                      <Send className="w-4 h-4 text-white" />
+                      <span>Enviar</span>
+                    </button>
                   </div>
-                </div>
-
-                <div className="flex items-start gap-3.5">
-                  <div className="p-2.5 rounded-2xl bg-cyan-50 text-[#005A9C] shrink-0">
-                    <Mail className="w-5 h-5 text-[#00BFFF]" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-[#005A9C]">Correo Electrónico</p>
-                    <p className="text-xs text-[#708090] font-medium">{CLINIC_EMAIL}</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3.5">
-                  <div className="p-2.5 rounded-2xl bg-cyan-50 text-[#005A9C] shrink-0">
-                    <MapPin className="w-5 h-5 text-[#00BFFF]" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-[#005A9C]">Ubicación Geográfica</p>
-                    <p className="text-xs text-[#708090] leading-snug">{CLINIC_ADDRESS}</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3.5">
-                  <div className="p-2.5 rounded-2xl bg-cyan-50 text-[#005A9C] shrink-0">
-                    <Clock className="w-5 h-5 text-[#00BFFF]" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-[#005A9C]">Horarios de Atención</p>
-                    <p className="text-xs text-[#708090]">{CLINIC_HOURS}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Interactive Map Visual Mock */}
-            <div className="bg-[#005A9C] text-white rounded-3xl p-8 shadow-xl relative overflow-hidden">
-              <div className="relative z-10 space-y-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-cyan-200 text-[11px] font-bold">
-                  <ShieldCheck className="w-4 h-4 text-[#00BFFF]" />
-                  <span>Parqueadero Privado Gratuito</span>
-                </div>
-                <h4 className="text-lg font-bold">Edificio Médico Cielo</h4>
-                <p className="text-xs text-cyan-100/90 leading-relaxed">
-                  Contamos con acceso para personas con movilidad reducida, ascensores camilleros y servicio de valet parking.
-                </p>
-                <a
-                  href={`https://maps.google.com/?q=${encodeURIComponent(CLINIC_ADDRESS)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-xs font-bold text-[#00BFFF] hover:underline pt-2"
-                >
-                  <span>Abrir en Google Maps</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              </div>
+                </form>
+              )}
             </div>
 
           </div>
-
         </div>
 
       </div>

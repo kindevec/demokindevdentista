@@ -103,7 +103,7 @@ export const DOCTORS_DATA: Doctor[] = [
     role: "Director Médico & Especialista en Implantología",
     specialty: "Implantes Digitales & Rehabilitación Oral",
     experienceYears: 16,
-    image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=800&auto=format&fit=crop",
     bio: "Pionero en cirugía guiada 3D en la región. Dedicado a brindar tratamientos mínimamente invasivos con empatía y precisión suiza.",
     education: "Especialista en Implantología - Univ. de Sao Paulo / Magíster en Rehabilitación Oral",
     schedule: "Lun, Mié, Vie (09:00 - 17:00)"
@@ -125,7 +125,7 @@ export const DOCTORS_DATA: Doctor[] = [
     role: "Especialista en Endodoncia & Urgencias",
     specialty: "Endodoncia Microscópica & Manejo del Dolor",
     experienceYears: 10,
-    image: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=800&auto=format&fit=crop",
     bio: "Experto en técnicas anestésicas indoloras y microcirugía reconstructiva. Enfoque 100% centrado en la tranquilidad del paciente.",
     education: "Especialista en Endodoncia Automatizada - Univ. de Buenos Aires",
     schedule: "Lun a Sáb (Urgencias 24h)"
@@ -138,8 +138,8 @@ export const BEFORE_AFTER_CASES: BeforeAfterCase[] = [
     title: "Alineación de Apiñamiento severo con Ortodoncia Invisible",
     category: "ortodoncia",
     description: "Paciente de 28 años con apiñamiento anterior y mordida cruzada. Tratamiento de 11 meses con alineadores invisibles sin extracciones.",
-    beforeImage: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=800&auto=format&fit=crop",
-    afterImage: "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=800&auto=format&fit=crop",
+    beforeImage: "/images/apinamiento-antes.png",
+    afterImage: "/images/apinamiento-despues.png",
     duration: "11 Meses",
     patientName: "Mariana G.",
     testimonial: "No quería usar brackets metálicos por mi trabajo. Con los alineadores de Cielo Dental nadie notó que estaba en tratamiento y los cambios fueron asombrosos desde el tercer mes.",
@@ -149,9 +149,9 @@ export const BEFORE_AFTER_CASES: BeforeAfterCase[] = [
     id: "case-2",
     title: "Rehabilitación Completa con Implantes Guiados en 3D",
     category: "implantes",
-    description: "Paciente masculino con pérdida de 2 piezas superiores por traumatismo. Colocación de implantes inmediatos y coronas de circonio.",
-    beforeImage: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=800&auto=format&fit=crop",
-    afterImage: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=800&auto=format&fit=crop",
+    description: "Paciente con ausencia dental posterior y colocación de implantes de titanio con coronas cerámicas definitivas.",
+    beforeImage: "/images/implantes-antes.png",
+    afterImage: "/images/implantes-despues.png",
     duration: "3 Sesiones",
     patientName: "Roberto V.",
     testimonial: "Pensé que el proceso dolería, pero fue sorprendentemente suave gracias a la cirugía guiada por computadora. Volví a sonreír con total confianza.",
@@ -162,8 +162,8 @@ export const BEFORE_AFTER_CASES: BeforeAfterCase[] = [
     title: "Diseño de Sonrisa Cerámico y Blanqueamiento Laser",
     category: "estetica",
     description: "Transformación estética con 6 carillas de porcelana ultra delgada y blanqueamiento LED para corregir coloración y asimetría.",
-    beforeImage: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=800&auto=format&fit=crop",
-    afterImage: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=800&auto=format&fit=crop",
+    beforeImage: "/images/estetica-antes.png",
+    afterImage: "/images/estetica-despues.png",
     duration: "2 Sesiones",
     patientName: "Camila R.",
     testimonial: "El equipo de Cielo Dental me escuchó con muchísima empatía. Probar la sonrisa digital antes de poner las carillas me dio 100% de tranquilidad.",
@@ -183,12 +183,12 @@ export const SOCIAL_NETWORKS: SocialNetwork[] = [
     actionText: "Visitar Facebook Oficial",
     url: "https://www.facebook.com/kindevec/",
     waMessage: "Hola Cielo Dental, los vi en Facebook y quisiera consultar sobre sus servicios y promociones activas.",
-    image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=800&auto=format&fit=crop"
+    image: "/images/social-facebook.png"
   },
   {
     id: "instagram",
     name: "Instagram Oficial",
- handle: "@kindevx",
+    handle: "@kindevx",
     iconType: "instagram",
     color: "#E4405F",
     bgColor: "bg-pink-50 border-pink-200 text-[#E4405F]",
@@ -196,7 +196,7 @@ export const SOCIAL_NETWORKS: SocialNetwork[] = [
     actionText: "Ver Instagram Oficial",
     url: "https://www.instagram.com/kindevx/",
     waMessage: "Hola Cielo Dental, encontré su perfil en Instagram y me encantaron los casos de diseño de sonrisa. Quisiera agendar una cita.",
-    image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=800&auto=format&fit=crop"
+    image: "/images/social-instagram.png"
   },
   {
     id: "whatsapp",
@@ -209,6 +209,6 @@ export const SOCIAL_NETWORKS: SocialNetwork[] = [
     actionText: "Iniciar Chat Directo en WhatsApp",
     url: createWhatsAppLink("Hola Cielo Dental, me comunico desde la web para realizar una consulta rápida."),
     waMessage: "Hola Cielo Dental, me comunico desde su portal oficial para realizar una consulta rápida con un asesor.",
-    image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=800&auto=format&fit=crop"
+    image: "/images/social-whatsapp.png"
   }
 ];

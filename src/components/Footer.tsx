@@ -1,7 +1,8 @@
 import React from 'react';
 import { Logo } from './Logo';
 import { CLINIC_PHONE_DISPLAY, CLINIC_EMAIL, CLINIC_ADDRESS, CLINIC_HOURS, createWhatsAppLink, GENERAL_WA_MESSAGE } from '../data/clinicData';
-import { Phone, Mail, MapPin, Clock, Heart, ShieldCheck } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, ShieldCheck } from 'lucide-react';
+import kindevIcon from '../assets/kindev_icon.webp';
 
 export const Footer: React.FC = () => {
   // Official Facebook SVG
@@ -40,14 +41,14 @@ export const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-cyan-500/30">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-cyan-500/30 items-start">
           
           {/* Col 1: Brand & Tagline */}
-          <div className="lg:col-span-4 space-y-4">
+          <div className="lg:col-span-7 space-y-4">
             <div className="bg-white/95 p-3 rounded-2xl inline-block shadow-md">
               <Logo size="md" />
             </div>
-            <p className="text-xs text-cyan-100/90 leading-relaxed max-w-sm">
+            <p className="text-xs text-cyan-100/90 leading-relaxed max-w-md">
               Clínica odontológica de alta especialidad. Tecnología digital de vanguardia, ortodoncia invisible, implantes guiados 3D y atención humana transparente e indolora.
             </p>
 
@@ -96,60 +97,26 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Col 2: Navigation Links */}
-          <div className="lg:col-span-3 space-y-3">
-            <h4 className="text-xs font-bold text-[#00BFFF] uppercase tracking-wider">
-              Navegación Principal
-            </h4>
-            <ul className="space-y-2 text-xs text-cyan-100/90 font-medium">
-              <li>
-                <a href="#inicio" className="hover:text-[#00BFFF] transition-colors">
-                  1. Inicio & Propuesta de Valor
-                </a>
-              </li>
-              <li>
-                <a href="#especialidades" className="hover:text-[#00BFFF] transition-colors">
-                  2. Especialidades & Tratamientos 3D
-                </a>
-              </li>
-              <li>
-                <a href="#nosotros" className="hover:text-[#00BFFF] transition-colors">
-                  3. Equipo Médico & Tecnología
-                </a>
-              </li>
-              <li>
-                <a href="#casos-reales" className="hover:text-[#00BFFF] transition-colors">
-                  4. Slider de Casos Antes y Después
-                </a>
-              </li>
-              <li>
-                <a href="#contacto" className="hover:text-[#00BFFF] transition-colors">
-                  5. Redes Sociales & Contacto
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Col 3: Direct Contact Information */}
+          {/* Col 2: Direct Contact Information */}
           <div className="lg:col-span-5 space-y-3">
             <h4 className="text-xs font-bold text-[#00BFFF] uppercase tracking-wider">
               Atención Directa al Paciente
             </h4>
-            <div className="space-y-2.5 text-xs text-cyan-100/90">
-              <div className="flex items-center gap-2">
+            <div className="space-y-3 text-xs text-cyan-100/90">
+              <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-[#00BFFF] shrink-0" />
                 <span className="font-bold text-white">{CLINIC_PHONE_DISPLAY}</span>
                 <span className="text-[10px] text-cyan-200 bg-white/10 px-2 py-0.5 rounded-full">WhatsApp 24/7</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-[#00BFFF] shrink-0" />
                 <span>{CLINIC_EMAIL}</span>
               </div>
-              <div className="flex items-start gap-2">
+              <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-[#00BFFF] shrink-0 mt-0.5" />
                 <span>{CLINIC_ADDRESS}</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2.5">
                 <Clock className="w-4 h-4 text-[#00BFFF] shrink-0" />
                 <span>{CLINIC_HOURS}</span>
               </div>
@@ -158,17 +125,47 @@ export const Footer: React.FC = () => {
 
         </div>
 
-        {/* Bottom Copyright & Guarantee */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-cyan-200/80 gap-4">
-          <p>desarrollado por kindev © 2026 Cielo Dental. Todos los derechos reservados. Registro Sanitario Aprobado.</p>
-          <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1">
+        {/* Bottom Copyright & KINDEV Attribution Bar (Mirrors the 12-col grid for exact vertical alignment) */}
+        <div className="pt-8 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center text-xs text-cyan-200/80">
+          <div className="lg:col-span-7 flex flex-col sm:flex-row items-center sm:items-start lg:items-center gap-2 sm:gap-6 text-center sm:text-left">
+            <p>&copy; {new Date().getFullYear()} Cielo Dental. Todos los derechos reservados.</p>
+            <div className="flex items-center gap-2 text-[11px] text-cyan-100/70">
               <ShieldCheck className="w-3.5 h-3.5 text-[#00BFFF]" />
-              Garantía Sanitaria
-            </span>
-            <span>•</span>
-            <a href="#contacto" className="hover:underline text-cyan-100">
-              Contacto: {CLINIC_PHONE_DISPLAY}
+              <span>Garantía Sanitaria Aprobada</span>
+            </div>
+          </div>
+
+          {/* Logo y firma KINDEV: alineado exactamente en la misma línea vertical que Atención Directa */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-start">
+            <a 
+              href="https://kindevx.web.app/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="hover:text-white transition-all text-xs sm:text-sm flex items-center gap-2.5 group"
+              title="Desarrollado por KINDEV"
+              aria-label="Desarrollado por KINDEV"
+            >
+              {/* Logo de Colibrí KINDEV estático con efectos visuales de resplandor y hover */}
+              <div className="relative inline-flex items-center justify-center flex-shrink-0 group/icon">
+                {/* Halo de luz de fondo con efecto de respiración sutil */}
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#00E5FF]/30 to-[#00B0FF]/30 blur-md opacity-70 group-hover:opacity-100 group-hover:scale-125 transition-all duration-500 pointer-events-none"></div>
+                
+                <img 
+                  src={kindevIcon} 
+                  alt="KINDEV Logo" 
+                  width="44" 
+                  height="44" 
+                  loading="lazy" 
+                  decoding="async" 
+                  className="relative z-10 w-9 h-9 sm:w-10 sm:h-10 object-contain drop-shadow-[0_2px_10px_rgba(0,229,255,0.45)] group-hover:drop-shadow-[0_4px_18px_rgba(0,229,255,0.85)] group-hover:scale-110 group-hover:-rotate-6 group-hover:brightness-110 transition-all duration-300 ease-out inline-block"
+                />
+              </div>
+              <span className="text-xs sm:text-sm text-cyan-100/90 group-hover:text-white transition-colors">
+                Desarrollado por{" "}
+                <span className="font-extrabold text-[#00BFFF] drop-shadow-[0_0_8px_rgba(0,191,255,0.4)] group-hover:drop-shadow-[0_0_16px_rgba(0,191,255,0.95)] group-hover:brightness-125 group-hover:tracking-wider inline-block transition-all duration-300">
+                  KINDEV
+                </span>
+              </span>
             </a>
           </div>
         </div>
@@ -177,3 +174,4 @@ export const Footer: React.FC = () => {
     </footer>
   );
 };
+

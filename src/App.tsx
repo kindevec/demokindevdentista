@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { TopBar } from './components/TopBar';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { TrustCounters } from './components/TrustCounters';
@@ -9,6 +8,7 @@ import { BeforeAfterSection } from './components/BeforeAfterSection';
 import { SocialAndContactSection } from './components/SocialAndContactSection';
 import { Footer } from './components/Footer';
 import { MobileBottomNav } from './components/MobileBottomNav';
+import { FloatingWhatsAppButton } from './components/FloatingWhatsAppButton';
 import { PatientPortalModal } from './components/PatientPortalModal';
 import { AppointmentModal } from './components/AppointmentModal';
 import { createWhatsAppLink, EMERGENCY_WA_MESSAGE } from './data/clinicData';
@@ -18,6 +18,28 @@ export default function App() {
   const [isPortalOpen, setIsPortalOpen] = useState<boolean>(false);
   const [isBookingOpen, setIsBookingOpen] = useState<boolean>(false);
   const [preselectedSpecialty, setPreselectedSpecialty] = useState<string>('ortodoncia');
+
+  useEffect(() => {
+    const sectionIds = ['inicio', 'especialidades', 'nosotros', 'casos-reales', 'contacto'];
+
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 140;
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const id = sectionIds[i];
+        const el = document.getElementById(id);
+        if (el) {
+          const top = el.offsetTop;
+          if (scrollPosition >= top) {
+            setActiveSection(id);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleOpenBookingWithSpecialty = (specId: string) => {
     setPreselectedSpecialty(specId);
@@ -30,12 +52,9 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FDFDFD] text-[#708090] font-sans antialiased selection:bg-[#00BFFF]/20 selection:text-[#005A9C] pb-16 lg:pb-0">
+    <div className="min-h-screen bg-[#FDFDFD] text-[#708090] font-sans antialiased selection:bg-[#00BFFF]/20 selection:text-[#005A9C] pb-28 lg:pb-0 overflow-x-clip w-full">
       
-      {/* 1. Top Bar (Fine info bar with phone, email, hours) */}
-      <TopBar />
-
-      {/* 2. Navbar (Logo, 5 Section links, Dropdown, Portal del Paciente button) */}
+      {/* 1. Navbar (Header principal directamente en la parte superior) */}
       <Navbar
         activeSection={activeSection}
         setActiveSection={setActiveSection}
@@ -60,7 +79,7 @@ export default function App() {
         />
 
         {/* Section 3: Nosotros (Medical team & Clinical tech) */}
-        <AboutSection />
+        <AboutSection onOpenBooking={() => setIsBookingOpen(true)} />
 
         {/* Section 4: Casos Reales (Before & After Slider in Orthodontics & Implants) */}
         <BeforeAfterSection />
@@ -73,6 +92,9 @@ export default function App() {
 
       {/* Footer */}
       <Footer />
+
+      {/* Global Floating Side WhatsApp Button with hide/show animations */}
+      <FloatingWhatsAppButton />
 
       {/* Mobile Bottom Navigation Bar (5 Icons including Citas de Urgencia button) */}
       <MobileBottomNav
